@@ -1,5 +1,5 @@
 /**
- * Day index enum
+ * StateRepositoryEnum index enum
  */
 export enum StateRepositoryEnum {
   Verificado = 604,

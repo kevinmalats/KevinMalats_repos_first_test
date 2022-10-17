@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const PostgresGateway_1 = __importDefault(require("../gateway/PostgresGateway"));
-var lodash = require('lodash');
+const lodash = require('lodash');
 class OrganizationService {
     constructor() {
         this._postgresGateway = new PostgresGateway_1.default();
@@ -26,17 +26,21 @@ class OrganizationService {
             return false;
         });
     }
-    deleteOrganization() {
+    deleteOrganization(params) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(params);
+            const { id_organization } = params;
+            const query = "Delete From organization Where id_organization = $1";
+            const values = [id_organization];
+            yield this._postgresGateway.deleteItem(query, values);
             return false;
         });
     }
     readOrganizations() {
         return __awaiter(this, void 0, void 0, function* () {
-            lodash.get();
             const organizations = [];
             const query = "Select * from organization";
-            (yield this._postgresGateway.getItems(query)).map((row) => organizations.push({
+            (yield this._postgresGateway.getItems(query, undefined)).map((row) => organizations.push({
                 id_organization: lodash.get(row, "id_organization"),
                 name: lodash.get(row, "name", ""),
                 status: lodash.get(row, "status")

@@ -3,7 +3,7 @@ import {IOrganization} from "../repository/IOrganization";
 import {Organization} from "../interface/Organization";
 import PostgresGateway from "../gateway/PostgresGateway";
 import {OrganizationRequest} from "../interface/OrganizationRequest";
-var lodash = require('lodash');
+const lodash = require('lodash');
 
 class OrganizationService implements IOrganization{
     private _postgresGateway: PostgresGateway = new PostgresGateway();
@@ -14,15 +14,19 @@ class OrganizationService implements IOrganization{
         return false;
     }
 
-    async deleteOrganization(): Promise<boolean> {
+    async deleteOrganization(params: object): Promise<boolean> {
+        console.log(params)
+        const {id_organization} = params;
+        const query: string = "Delete From organization Where id_organization = $1";
+        const values: number[] = [id_organization];
+        await this._postgresGateway.deleteItem(query,values);
         return false;
     }
 
     async readOrganizations(): Promise<Organization[]> {
-        lodash.get()
         const organizations: Organization[] = [];
         const query: string = "Select * from organization";
-          (await this._postgresGateway.getItems(query)).map((row)=> organizations.push({
+          (await this._postgresGateway.getItems(query, undefined)).map((row)=> organizations.push({
               id_organization:lodash.get(row, "id_organization"),
               name:lodash.get(row,"name",""),
               status: lodash.get(row,"status")

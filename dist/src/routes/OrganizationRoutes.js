@@ -19,12 +19,16 @@ const _organizationService = new OrganizationService_1.default();
 route.get("/organizations", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send(yield _organizationService.readOrganizations());
 }));
-route.post("/organizations/create", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+route.post("/organizations", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(_req.body);
     res.send(yield _organizationService.createOrganization(_req.body));
 }));
-route.put("/organizations/update", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+route.put("/organizations", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(_req.body);
     res.send(yield _organizationService.updateOrganization(_req.body));
+}));
+route.delete("/organizations/:id_organization", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(_req.params);
+    res.send(yield _organizationService.deleteOrganization(_req.params));
 }));
 exports.default = route;

@@ -9,14 +9,19 @@ const _organizationService: OrganizationService = new OrganizationService();
 route.get("/organizations", async (_req: Request, res: Response) => {
     res.send(await _organizationService.readOrganizations());
 })
-route.post("/organizations/create", async (_req: Request, res: Response) => {
+route.post("/organizations", async (_req: Request, res: Response) => {
     console.log(_req.body)
     res.send(await _organizationService.createOrganization(_req.body));
 })
 
-route.put("/organizations/update", async (_req: Request, res: Response) => {
+route.put("/organizations", async (_req: Request, res: Response) => {
     console.log(_req.body)
     res.send(await _organizationService.updateOrganization(_req.body));
+})
+
+route.delete("/organizations/:id_organization", async (_req: Request, res: Response) => {
+    console.log(_req.params)
+    res.send(await _organizationService.deleteOrganization(_req.params));
 })
 
 

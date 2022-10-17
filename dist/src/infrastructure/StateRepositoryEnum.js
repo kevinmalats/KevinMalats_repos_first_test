@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateRepositoryEnum = void 0;
 /**
- * Day index enum
+ * StateRepositoryEnum index enum
  */
 var StateRepositoryEnum;
 (function (StateRepositoryEnum) {
